@@ -1,0 +1,12 @@
+services:
+  tickpay:
+    build: .
+    image: tickpay/fake-acquirer:latest
+    container_name: tickpay
+    environment:
+      - RUST_LOG=info
+      - ACQ_WEBHOOK_SECRET=${ACQ_WEBHOOK_SECRET:-change_me}
+      - PORT=8080
+    ports:
+      - "8080:8080"   # se usar proxy reverso, pode remover esta linha
+    restart: unless-stopped
